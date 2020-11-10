@@ -14,4 +14,3 @@ Files:
   full_node1.py
   full_node2.py
   
-  Hello 
