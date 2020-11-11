@@ -76,7 +76,7 @@ def main():
 			input('ERROR: input selection invalid. Input any key to try again.\n')
 
 	fileUnconfirmedTx.close()
-	fileBalance.close()
+	# fileBalance.close()
 	clientSocket.close()
 
 main()
