@@ -24,7 +24,7 @@ def main():
 	txFee = 2
 
 	fileUnconfirmedTx = open('unconfirmed_T.txt', 'w')
-	# fileBalance = open('balance.txt', 'w')
+	fileBalance = open('balance.txt', 'w')
 
 	clientSocket.connect((serverName, serverPort))
 
@@ -65,10 +65,14 @@ def main():
 				unconfirmedBalance -= (txAmount + txFee)
 				fileUnconfirmedTx.write(str(tx) + '\n')
 				# send tx to server
-				# update balance.txt with ne unconfirmed balance 
+				# update balance.txt with ne unconfirmed balance
+                elif (option == '2'):
+		    print('Option 2 has been selected.\n')
+                    print('The current balance for each account:\n')
+		    BalA1 = ('A0000001:'+hex(unconfirmedBalanceA1)+':'+hex(confirmedBalanceA1))
+		    print(BalA1)
 			
-		elif(option == '2'):
-			print('Option 2 has been selected.\n')
+			
 		elif(option == '3'):
 			print('Option 3 has been selected.\n')
 		elif(option == '4'):
