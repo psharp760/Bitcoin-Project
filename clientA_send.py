@@ -16,8 +16,11 @@ def main():
 	serverPort = 12345
 	clientSocket = socket(AF_INET, SOCK_DGRAM)
 
-	unconfirmedBalance = 1000
-	confirmedBalance = 1000
+	unconfirmedBalanceA1 = 1000
+	confirmedBalanceA1 = 1000
+	unconfirmedBalanceA2 = 1000
+	confirmedBalanceA2 = 1000
+
 	txFee = 2
 
 	fileUnconfirmedTx = open('unconfirmed_T.txt', 'w')
@@ -44,9 +47,11 @@ def main():
 			txAmount = int(amountInput)
 
 			if (payerInput == '1'):
-				payer = 'A0000001'	
+				payer = 'A0000001'
+				unconfirmedBalance = unconfirmedBalanceA1	
 			elif (payerInput == '2'):
 				payer = 'A0000002'
+				unconfirmedBalance = unconfirmedBalanceA2
 			if (payeeInput == '1'):
 				payee = 'B0000001'	
 			elif (payeeInput == '2'):
@@ -59,7 +64,8 @@ def main():
 				tx = (payer + payee + hex(txAmount))
 				unconfirmedBalance -= (txAmount + txFee)
 				fileUnconfirmedTx.write(str(tx) + '\n')
-		
+				# send tx to server
+				# update balance.txt with ne unconfirmed balance 
 			
 		elif(option == '2'):
 			print('Option 2 has been selected.\n')
