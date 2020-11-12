@@ -18,8 +18,10 @@ print('full_node1 is ready to send.\n')
 # open temp_T.txt to write 
 fileTxTemp = open('temp_T.txt', 'w+')
 
+
 fullNodeBalance = 0
 txCount = 0
+blockChain = []
 
 while 1: 
 	message, clientAddress = serverSocket1.recvfrom(2048)
@@ -27,17 +29,23 @@ while 1:
 	# append tx to temp_T.txt
 	fileTxTemp.write(str(tx) + '\n')
 	txCount += 1
-	txn = fileTxTemp.read()
+	blockChain.append(tx)
 
-	print(txn)
+	fileBlockChain = open('blockchain.txt', 'w')
+	for line in blockChain:
+		fileBlockChain.write(''.join(line) + '\n')
 	
-	# if (txCount % 4 == 0):
+	
+	# create temp tx array to store each tx
+	# if temp tx array length % 4 == 0 
+		# write to blockchain array
+		# write to blockchain.txt
+		# remove temp_tx array
+		# remove from temp_T.txt 
+
 		
 
 
-
-	# add to blockchain
-	# send 
 	
 # serverSocket2.sendto(modifiedMessage.encode(), clientAddress)
 
