@@ -18,7 +18,8 @@ print('full_node1 is ready to send.\n')
 # open temp_T.txt to write 
 fileTxTemp = open('temp_T.txt', 'w+')
 
-
+txFee = 2
+miningFee = 30 
 fullNodeBalance = 0
 txCount = 0
 blockChain = []
@@ -32,10 +33,16 @@ while 1:
 	blockChain.append(tx)
 
 	fileBlockChain = open('blockchain.txt', 'w')
-	for line in blockChain:
-		fileBlockChain.write(''.join(line) + '\n')
-	
-	
+
+	if (len(blockChain) % 4 == 0):
+		fullNodeBalance = ((txFee * 4)+ miningFee)
+		for line in blockChain:
+			fileBlockChain.write(''.join(line) + '')
+
+
+		# 1 2 3 4 5 6 7 8 ...
+		# 1234 5678 ...
+
 	# create temp tx array to store each tx
 	# if temp tx array length % 4 == 0 
 		# write to blockchain array
