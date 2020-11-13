@@ -1,11 +1,13 @@
 # clientA_receive.py
 from socket import *
 
-serverName = 'localhost'
-serverPort2 = 54321
-clientSocket2 = socket(AF_INET, SOCK_DGRAM)
+clientPortA = 15001
+clientSocketA = socket(AF_INET, SOCK_DGRAM)
+clientSocketA.bind(('', clientPortA))
+print('client A is ready to receive.\n')
 
-message, serverAddress = clientSocket2.recvfrom(2048)
-modifiedMessage = message.decode()
-
-print(modifiedMessage)
+while 1:
+	message, serverAddress = clientSocketA.recvfrom(2048)
+	print('full node 1 has sent a message.\n')
+	modifiedMessage = message.decode()
+	print(modifiedMessage)
