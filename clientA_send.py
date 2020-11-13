@@ -15,58 +15,58 @@ def menu():
 # main() function driver program for clientA_send
 def main():
 
-	serverName = 'localhost'							# establish connection to server
-	serverPortA = 15000									# set port number
-	clientSocketA = socket(AF_INET, SOCK_DGRAM)			# create socket
-	clientSocketA.connect((serverName, serverPortA))	# connect socket to server
+	serverName = 'localhost'                            # establish connection to server
+	serverPortA = 15000                                 # set port number
+	clientSocketA = socket(AF_INET, SOCK_DGRAM)         # create socket
+	clientSocketA.connect((serverName, serverPortA))    # connect socket to server
 
-	unconfirmedBalanceA1 = 1000		# unconfirmed balance for account A0000001
-	confirmedBalanceA1 = 1000		# confirmed balance for account A0000001
-	unconfirmedBalanceA2 = 1000		# unconfirmed balance for account A0000002
-	confirmedBalanceA2 = 1000		# confirmed balance for account A0000002
-	txFee = 2						# transaction fee 
+	unconfirmedBalanceA1 = 1000     # unconfirmed balance for account A0000001
+	confirmedBalanceA1 = 1000       # confirmed balance for account A0000001
+	unconfirmedBalanceA2 = 1000     # unconfirmed balance for account A0000002
+	confirmedBalanceA2 = 1000       # confirmed balance for account A0000002
+	txFee = 2                       # transaction fee 
 
-	fileUnconfirmedTx = open('unconfirmed_T.txt', 'w')		# open unconfirmed_T.txt
-	fileBalance = open('balance.txt', 'w')					# open balance.txt 
+	fileUnconfirmedTx = open('unconfirmed_T.txt', 'w')      # open unconfirmed_T.txt
+	fileBalance = open('balance.txt', 'w')                  # open balance.txt 
 
-	loop = True		# bool variable loop initialized to True
-	while loop:		# while 'loop' is true loop through contents below
-		menu()		# call menu() function to display menu
-		option = input('Input choice (1 - 6): ') 		# get user input for menu(), store in option		
+	loop = True     # bool variable loop initialized to True
+	while loop:     # while 'loop' is true loop through contents below
+		menu()      # call menu() function to display menu
+		option = input('Input choice (1 - 6): ')        # get user input for menu(), store in option		
 
-		if (option == '1'):								# check if user inputs option 1 to enter new transaction
-			print('Option 1 has been selected.\n') 		# print sub menu for user to input transaction
-			print('Select the Payer:\n')				# select the payer
-			print('1.\tA0000001\n')						# option 1 A0000001
-			print('2.\tA0000002\n')						# option 2 A0000002
-			payerInput = input('Choice: ')				# get user input for payer, store in payerInput
-			print('Select the Payee:\n')				# select the payee
-			print('1.\tB0000001\n')						# option 1 B0000001
-			print('2.\tB0000002\n')						# option 2 B0000002
-			payeeInput = input('Choice: ')				# get user input for payee, store in payeeInput
-			amountInput = input ('Input the amount of payment in decimal:\n')	# get user input for transaction amount
-			txAmount = int(amountInput)		# typecast transaction amount 'amountInput', store in txAmount
+		if (option == '1'):                             # check if user inputs option 1 to enter new transaction
+			print('Option 1 has been selected.\n')      # print sub menu for user to input transaction
+			print('Select the Payer:\n')                # select the payer
+			print('1.\tA0000001\n')                     # option 1 A0000001
+			print('2.\tA0000002\n')                     # option 2 A0000002
+			payerInput = input('Choice: ')              # get user input for payer, store in payerInput
+			print('Select the Payee:\n')                # select the payee
+			print('1.\tB0000001\n')                     # option 1 B0000001
+			print('2.\tB0000002\n')                     # option 2 B0000002
+			payeeInput = input('Choice: ')              # get user input for payee, store in payeeInput
+			amountInput = input ('Input the amount of payment in decimal:\n')    # get user input for transaction amount
+			txAmount = int(amountInput)      # typecast transaction amount 'amountInput', store in txAmount
 
-			if (payerInput == '1'):							# check if payerInput is 1 						
-				payer = 'A0000001'							# set payer to account A0000001
-				unconfirmedBalance = unconfirmedBalanceA1	# set unconfirmed balance to unconfirmed balance of A0000001
-			elif (payerInput == '2'):						# check if payerInput is 2
-				payer = 'A0000002'							# set payer to account A0000002
-				unconfirmedBalance = unconfirmedBalanceA2	# set unconfirmed balance to unonfirmed balance of A0000002
-			if (payeeInput == '1'):							# check if payeeInput is 1
-				payee = 'B0000001'							# set payee to account B0000001
-			elif (payeeInput == '2'):						# check if payeeInput is 2
-				payee = 'B0000002'							# set payee to account B0000002
+			if (payerInput == '1'):                         # check if payerInput is 1 						
+				payer = 'A0000001'                          # set payer to account A0000001
+				unconfirmedBalance = unconfirmedBalanceA1   # set unconfirmed balance to unconfirmed balance of A0000001
+			elif (payerInput == '2'):                       # check if payerInput is 2
+				payer = 'A0000002'                          # set payer to account A0000002
+				unconfirmedBalance = unconfirmedBalanceA2   # set unconfirmed balance to unonfirmed balance of A0000002
+			if (payeeInput == '1'):                         # check if payeeInput is 1
+				payee = 'B0000001'                          # set payee to account B0000001
+			elif (payeeInput == '2'):                       # check if payeeInput is 2
+				payee = 'B0000002'                          # set payee to account B0000002
 
-			if (txAmount + txFee > unconfirmedBalance):		# check if txAmount + txFee > unconfirmedBalance
-				print("ERROR: Cannot process transaction. Insufficent funds.\n")	# print error message
-			elif (txAmount + txFee <= unconfirmedBalance):		# check if txAmount + txFee <= unconfirmedBalance
+			if (txAmount + txFee > unconfirmedBalance):       # check if txAmount + txFee > unconfirmedBalance
+				print("ERROR: Cannot process transaction. Insufficent funds.\n")     # print error message
+			elif (txAmount + txFee <= unconfirmedBalance):        # check if txAmount + txFee <= unconfirmedBalance
 				print('Tx: ' + payer + ' pays ' + payee + ' the amount of ' + str(txAmount) + ' BC.\n')
-				tx = (payer + payee + hex(txAmount))			# create a transaction and store in tx
-				unconfirmedBalance -= (txAmount + txFee)		# update unconfirmedBalance after transaction 
-				fileUnconfirmedTx.write(str(tx) + '\n')			# write tx to unconfirmed_T.txt
-				message = str.encode(str(tx), 'utf-8')			# encode tx and store in message
-				clientSocketA.send(message)						# send message to server
+				tx = (payer + payee + hex(txAmount))            # create a transaction and store in tx
+				unconfirmedBalance -= (txAmount + txFee)        # update unconfirmedBalance after transaction 
+				fileUnconfirmedTx.write(str(tx) + '\n')         # write tx to unconfirmed_T.txt
+				message = str.encode(str(tx), 'utf-8')          # encode tx and store in message
+				clientSocketA.send(message)                     # send message to server
 				if (payerInput == '1'):
 					unconfirmedBalanceA1 = unconfirmedBalance
 				if (payerInput == '2'):
@@ -97,7 +97,7 @@ def main():
 	clientSocketA.close()
 # end of main()
 
-main()		# call main() driver function
+main()      # call main() driver function
 
 
 
