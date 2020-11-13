@@ -13,8 +13,8 @@ def menu():
 def main():
 
 	serverName = 'localhost'
-	serverPort1 = 12345
-	clientSocket1 = socket(AF_INET, SOCK_DGRAM)
+	serverPortA = 15000
+	clientSocketA = socket(AF_INET, SOCK_DGRAM)
 
 	unconfirmedBalanceA1 = 1000
 	confirmedBalanceA1 = 1000
@@ -26,7 +26,7 @@ def main():
 	fileUnconfirmedTx = open('unconfirmed_T.txt', 'w')
 	fileBalance = open('balance.txt', 'w')
 
-	clientSocket1.connect((serverName, serverPort1))
+	clientSocketA.connect((serverName, serverPortA))
 
 	loop = True
 	while loop:
@@ -66,7 +66,7 @@ def main():
 				fileUnconfirmedTx.write(str(tx) + '\n')
 				# send tx to server
 				message = str.encode(str(tx), 'utf-8')
-				clientSocket1.send(message)
+				clientSocketA.send(message)
 				if (payerInput == '1'):
 					unconfirmedBalanceA1 = unconfirmedBalance
 				if (payerInput == '2'):
@@ -94,7 +94,7 @@ def main():
 
 	fileUnconfirmedTx.close()
 	# fileBalance.close()
-	clientSocket1.close()
+	clientSocketA.close()
 
 main()
 
