@@ -12,32 +12,36 @@ clientName = 'localhost'
 clientPortA = 15001
 clientSocketA = socket(AF_INET, SOCK_DGRAM)
 
-# open temp_T.txt to write 
-fileTxTemp = open('temp_T.txt', 'w+')
-
 txFee = 2
 miningFee = 30 
 fullNodeBalance = 0
-txCount = 0
 blockChain = []
 
 while 1: 
 	message, clientAddress = serverSocketA.recvfrom(2048)
 	tx = message.decode()
-	# append tx to temp_T.txt
-	fileTxTemp.write(str(tx) + '\n')
 	blockChain.append(tx)
-	txCount += 1
 
-	fileBlockChain = open('blockchain.txt', 'w')
+	with open('temp_T.txt', 'w') as fileTxTemp:
+		i = 0
+		while i < len(blockChain):
+			line = blockChain[i] + '\n'
+			fileTxTemp.write(line)
+			i += 1
 
 	if (len(blockChain) % 4 == 0):
 		fullNodeBalance = ((txFee * 4)+ miningFee)
-		for line in blockChain:
-			fileBlockChain.write(''.join(line) + '')
 
-		messageToA = 'Test message to client A.\n'
+		with open('blockchain.txt', 'w') as fileBlockChain:
+			i = 0
+			while i < len(blockChain):
+				line = blockChain[i] + blockChain[i + 1] + blockChain[i + 2] + blockChain[i + 3] + '\n'
+				fileBlockChain.write(line)
+				i += 4
+
+		messageToA = 'true'
 		clientSocketA.sendto(messageToA.encode(), (clientName, clientPortA))
+
 
 
 

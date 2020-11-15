@@ -26,9 +26,6 @@ def main():
 	confirmedBalanceA2 = 1000       # confirmed balance for account A0000002
 	txFee = 2                       # transaction fee 
 
-	fileUnconfirmedTx = open('unconfirmed_T.txt', 'w')      # open unconfirmed_T.txt
-	fileBalance = open('balance.txt', 'w')                  # open balance.txt 
-
 	loop = True     # bool variable loop initialized to True
 	while loop:     # while 'loop' is true loop through contents below
 		menu()      # call menu() function to display menu
@@ -64,13 +61,17 @@ def main():
 				print('Tx: ' + payer + ' pays ' + payee + ' the amount of ' + str(txAmount) + ' BC.\n')
 				tx = (payer + payee + hex(txAmount))            # create a transaction and store in tx
 				unconfirmedBalance -= (txAmount + txFee)        # update unconfirmedBalance after transaction 
-				fileUnconfirmedTx.write(str(tx) + '\n')         # write tx to unconfirmed_T.txt
+				with open('unconfirmed_T.txt', 'a') as fileUnconfirmedTx:
+					fileUnconfirmedTx.write(str(tx) + '\n')         # write tx to unconfirmed_T.txt
+				fileUnconfirmedTx.close()
 				message = str.encode(str(tx), 'utf-8')          # encode tx and store in message
 				clientSocketA.send(message)                     # send message to server
 				if (payerInput == '1'):
 					unconfirmedBalanceA1 = unconfirmedBalance
 				if (payerInput == '2'):
 					unconfirmedBalanceA2 = unconfirmedBalance
+
+
 				# update balance.txt with new unconfirmed balance
 
 		elif (option == '2'):
@@ -78,8 +79,8 @@ def main():
 			print('The current balance for each account:\n')
 			BalA1 = ('A0000001:'+hex(unconfirmedBalanceA1)+':'+hex(confirmedBalanceA1))
 			print(BalA1)
-			BalA1 = ('A0000002:'+hex(unconfirmedBalanceA2)+':'+hex(confirmedBalanceA2))
-			print(BalA1)
+			BalA2 = ('A0000002:'+hex(unconfirmedBalanceA2)+':'+hex(confirmedBalanceA2))
+			print(BalA2)
 		elif(option == '3'):
 			print('Option 3 has been selected.\n')
 		elif(option == '4'):
@@ -92,7 +93,7 @@ def main():
 		else:
 			input('ERROR: input selection invalid. Input any key to try again.\n')
 
-	fileUnconfirmedTx.close()
+	# fileUnconfirmedTx.close()
 	fileBalance.close()
 	clientSocketA.close()
 # end of main()
