@@ -38,8 +38,3 @@ while 1:
 		os.rename("temp_t2.txt", "temp_T.txt")
 		os.remove("unconfirmed_T.txt")
 		os.rename("unconfirmed2.txt", "unconfirmed_T.txt")
-
-		# with open('unconfirmed_T.txt', '') as old, open('confirmed_T.txt', 'w') as new:
-		# 	lines = old.readlines()
-		# 	print(lines)
-		# 	new.writelines(lines[4:])

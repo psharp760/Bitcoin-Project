@@ -25,6 +25,7 @@ def main():
 	unconfirmedBalanceA2 = 1000     # unconfirmed balance for account A0000002
 	confirmedBalanceA2 = 1000       # confirmed balance for account A0000002
 	txFee = 2                       # transaction fee 
+	counter = 0
 
 	loop = True     # bool variable loop initialized to True
 	while loop:     # while 'loop' is true loop through contents below
@@ -68,11 +69,12 @@ def main():
 				clientSocketA.send(message)                     # send message to server
 				if (payerInput == '1'):
 					unconfirmedBalanceA1 = unconfirmedBalance
+					with open('balance.txt', 'w') as fileBalance:
+						fileBalance.write('A0000001:' + str(hex(unconfirmedBalanceA1)) + str(hex(confirmedBalanceA1)) + '\n')
 				if (payerInput == '2'):
 					unconfirmedBalanceA2 = unconfirmedBalance
-
-
-				# update balance.txt with new unconfirmed balance
+					with open('balance.txt', 'w') as fileBalance:
+						fileBalance.write('A0000002:' + str(hex(unconfirmedBalanceA2)) + str(hex(confirmedBalanceA2)) + '\n')
 
 		elif (option == '2'):
 			print('Option 2 has been selected.\n')
@@ -83,8 +85,30 @@ def main():
 			print(BalA2)
 		elif(option == '3'):
 			print('Option 3 has been selected.\n')
+			try:
+				unconfirmedTx = open('unconfirmed_T.txt', 'r')
+			except IOError:
+				print('No transactions have been made yet.\n')
+			else:
+				unconfirmedTxR = unconfirmedTx.read()
+				print('The unconfirmed balance is:\n')
+				print(unconfirmedTxR)
+				unconfirmedTx.close()
 		elif(option == '4'):
 			print('Option 4 has been selected.\n')
+			try:
+				confirmedTx = open('confirmed_T.txt', 'r')
+			except IOError:
+				print('No transactions have been confirmed yet.\n')
+			else:
+				confirmedTxR = confirmedTx.read()
+				confirmedList = confirmedTxR.split('\n')
+
+				for i in confirmedList:
+					if i:
+						counter += 1
+				print('Transaction: ')
+				print(counter)
 		elif(option == '5'):
 			print('Option 5 has been selected.\n')
 		elif(option == '6'):
@@ -93,13 +117,7 @@ def main():
 		else:
 			input('ERROR: input selection invalid. Input any key to try again.\n')
 
-	# fileUnconfirmedTx.close()
-	fileBalance.close()
 	clientSocketA.close()
 # end of main()
 
 main()      # call main() driver function
-
-
-
-

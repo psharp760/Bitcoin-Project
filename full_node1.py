@@ -45,21 +45,3 @@ while 1:
 
 
 
-
-		# 1 2 3 4 5 6 7 8 ...
-		# 1234 5678 ...
-
-	# create temp tx array to store each tx
-	# if temp tx array length % 4 == 0 
-		# write to blockchain array
-		# write to blockchain.txt
-		# remove temp_tx array
-		# remove from temp_T.txt 
-
-		
-
-
-	
-# serverSocket2.sendto(modifiedMessage.encode(), clientAddress)
-
-
