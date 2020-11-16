@@ -69,11 +69,11 @@ def main():
                 if (payerInput == '1'):
                     unconfirmedBalanceB1 = unconfirmedBalance
                     with open('balanceB.txt', 'w') as fileBalance:
-                        fileBalance.write('B0000001:' +str(hex(unconfirmedBalanceB1)) +str(hex(confirmedBalanceB1)))
+                        fileBalance.write('B0000001:' +str(hex(unconfirmedBalanceB1)) +str(hex(confirmedBalanceB1)) + 'B0000002:' + str(hex(unconfirmedBalanceB2)) + str(hex(confirmedBalanceB2)))
                 if (payerInput == '2'):
                     unconfirmedBalanceB2 = unconfirmedBalance
                     with open('balanceB.txt', 'w') as fileBalance:
-                        fileBalance.write('B0000002:' + str(hex(unconfirmedBalanceB2)) + str(hex(confirmedBalanceB2)))
+                        fileBalance.write('B0000001:' +str(hex(unconfirmedBalanceB1)) +str(hex(confirmedBalanceB1)) + 'B0000002:' + str(hex(unconfirmedBalanceB2)) + str(hex(confirmedBalanceB2)))
 
             # update balance.txt with new unconfirmed balance
 

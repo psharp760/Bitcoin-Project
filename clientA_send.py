@@ -27,22 +27,24 @@ def main():
 	txFee = 2                       # transaction fee 
 	counter = 0
 
-	try:
-		file = open('blockchainB.txt', 'r')
-	except IOError:
-		print('No blocks in blockchain B.\n')
-	else:
-		blockchainB = file.read()
-		print(blockchainB)
-
-	# check string for which account (A1, A2)
-	# update balanceA.txt 
-	# update local confirmed balance variables
-	
-
-
 	loop = True     # bool variable loop initialized to True
 	while loop:     # while 'loop' is true loop through contents below
+
+		# try:
+		# 	blockchainB = open('confirmed_TB.txt', 'r')
+		# except IOError:
+		# 	print('No blocks in blockchain B.\n')
+		# else:
+		# 	for line in blockchainB.readlines():
+		# 		accountB = line[0:8]
+		# 		accountA = line[8:16]
+		# 		amount = int(line[18:], 16)
+
+		# 		if (accountA == 'A0000001'):
+		# 			confirmedBalanceA1 += amount
+		# 		elif (accountA == 'A0000002'):
+		# 			confirmedBalanceA2 += amount
+		
 		menu()      # call menu() function to display menu
 		option = input('Input choice (1 - 6): ')        # get user input for menu(), store in option		
 
@@ -84,12 +86,11 @@ def main():
 				if (payerInput == '1'):
 					unconfirmedBalanceA1 = unconfirmedBalance
 					with open('balanceA.txt', 'w') as fileBalance:
-						fileBalance.write('A0000001:' + str(hex(unconfirmedBalanceA1)) + str(hex(confirmedBalanceA1)) + '\n')
+						fileBalance.write('A0000001:' + str(hex(unconfirmedBalanceA1)) + str(hex(confirmedBalanceA1)) + '\n' + 'A0000002:' + str(hex(unconfirmedBalanceA2)) + str(hex(confirmedBalanceA2)) + '\n')
 				if (payerInput == '2'):
 					unconfirmedBalanceA2 = unconfirmedBalance
 					with open('balanceA.txt', 'w') as fileBalance:
-						fileBalance.write('A0000002:' + str(hex(unconfirmedBalanceA2)) + str(hex(confirmedBalanceA2)) + '\n')
-
+						fileBalance.write('A0000001:' + str(hex(unconfirmedBalanceA1)) + str(hex(confirmedBalanceA1)) + '\n' + 'A0000002:' + str(hex(unconfirmedBalanceA2)) + str(hex(confirmedBalanceA2)) + '\n') 
 		elif (option == '2'):
 			print('Option 2 has been selected.\n')
 			print('The current balance for each account:\n')
