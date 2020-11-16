@@ -61,18 +61,18 @@ def main():
                 print('Tx: ' + payer + ' pays ' + payee + ' the amount of ' + str(txAmount) + ' BC.\n')
                 tx = (payer + payee + hex(txAmount))  # create a transaction and store in tx
                 unconfirmedBalance -= (txAmount + txFee)  # update unconfirmedBalance after transaction
-                with open('unconfirmed_T.txt', 'a') as fileUnconfirmedTx:
+                with open('unconfirmed_TB.txt', 'a') as fileUnconfirmedTx:
                     fileUnconfirmedTx.write(str(tx) + '\n')  # write tx to unconfirmed_T.txt
                 fileUnconfirmedTx.close()
                 message = str.encode(str(tx), 'utf-8')  # encode tx and store in message
                 clientSocketB.send(message)  # send message to server
                 if (payerInput == '1'):
                     unconfirmedBalanceB1 = unconfirmedBalance
-                    with open('balance.txt', 'w') as fileBalance:
+                    with open('balanceB.txt', 'w') as fileBalance:
                         fileBalance.write('B0000001:' +str(hex(unconfirmedBalanceB1)) +str(hex(confirmedBalanceB1)))
                 if (payerInput == '2'):
                     unconfirmedBalanceB2 = unconfirmedBalance
-                    with open('balance.txt', 'w') as fileBalance:
+                    with open('balanceB.txt', 'w') as fileBalance:
                         fileBalance.write('B0000002:' + str(hex(unconfirmedBalanceB2)) + str(hex(confirmedBalanceB2)))
 
             # update balance.txt with new unconfirmed balance
@@ -87,7 +87,7 @@ def main():
         elif (option == '3'):
             print('Option 3 has been selected.\n')
             try:
-                unconfirmedTx = open('unconfirmed_T.txt', 'r')
+                unconfirmedTx = open('unconfirmed_TB.txt', 'r')
             except IOError:
                 print('No transactions have been made yet.\n')
             else:
@@ -98,7 +98,7 @@ def main():
         elif (option == '4'):
             print('Option 4 has been selected.\n')
             try:
-                confirmedTx = open('confirmed_T.txt', 'r')
+                confirmedTx = open('confirmed_TB.txt', 'r')
             except IOError:
                 print('No transactions have been confirmed yet.\n')
             else:
@@ -118,7 +118,7 @@ def main():
         else:
             input('ERROR: input selection invalid. Input any key to try again.\n')
 
-     clientSocketB.close()
+    clientSocketB.close()
 # end of main()
 
 main()  # call main() driver function

@@ -7,34 +7,47 @@ clientSocketA = socket(AF_INET, SOCK_DGRAM)
 clientSocketA.bind(('', clientPortA))
 print('client A is ready to receive.\n')
 
+try:
+	file = open('blockchainB.txt', 'r')
+except IOError:
+	print('No blocks in blockchain B.\n')
+else:
+	blockchainB = file.read()
+	print(blockchainB)
+
+	# check string for which account (A1, A2)
+	# update balance.txt 
+
 while 1:
 	message, serverAddress = clientSocketA.recvfrom(2048)
 	modifiedMessage = message.decode()
 
 	if (modifiedMessage == 'true'):
 		print('full node 1 has sent a message.\n')
-		with open('unconfirmed_T.txt', 'r') as unconfirmed:
+		with open('unconfirmed_TA.txt', 'r') as unconfirmed:
 			lines = unconfirmed.read()
-		with open('confirmed_T.txt', 'a') as confirmed:
+		with open('confirmed_TA.txt', 'a') as confirmed:
 			confirmed.write(lines)
 		unconfirmed.close()
 
 		n = 4
 		nfirstlines = []
 
-		with open("temp_T.txt","r") as f, open("temp_t2.txt", "w") as out:
+		with open("temp_TA.txt","r") as f, open("temp_t2A.txt", "w") as out:
 			for x in range(n):
 				nfirstlines.append(next(f))
 			for line in f:
 				out.write(line)
 
-		with open("unconfirmed_T.txt","r") as f2, open("unconfirmed2.txt", "w") as out1:
+		with open("unconfirmed_TA.txt","r") as f2, open("unconfirmed2A.txt", "w") as out1:
 			for x in range(n):
 				nfirstlines.append(next(f2))
 			for line in f2:
 				out1.write(line)
 
-		os.remove("temp_T.txt")
-		os.rename("temp_t2.txt", "temp_T.txt")
-		os.remove("unconfirmed_T.txt")
-		os.rename("unconfirmed2.txt", "unconfirmed_T.txt")
+		os.remove("temp_TA.txt")
+		os.rename("temp_t2A.txt", "temp_TA.txt")
+		os.remove("unconfirmed_TA.txt")
+		os.rename("unconfirmed2A.txt", "unconfirmed_TA.txt")
+
+

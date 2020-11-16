@@ -22,7 +22,7 @@ while 1:
     tx = message.decode()
     blockChain.append(tx)
 
-    with open('temp_T.txt', 'w') as fileTxTemp:
+    with open('temp_TB.txt', 'w') as fileTxTemp:
         i = 0
         while i < len(blockChain):
             line = blockChain[i] + '\n'
@@ -32,11 +32,11 @@ while 1:
     if (len(blockChain) % 4 == 0):
         fullNodeBalance = ((txFee * 4) + miningFee)
 
-        with open('blockchain.txt', 'w') as fileBlockChain:
+        with open('blockchainB.txt', 'w') as fileBlockChain:
             i = 0
             while i < len(blockChain):
-                line = blockChain[i] + blockChain[i + 1] + blockChain[i + 2] + blockChain[i + 3] + '\n'
-                fileBlockChain.write(line)
+                block = blockChain[i] + blockChain[i + 1] + blockChain[i + 2] + blockChain[i + 3] + '\n'
+                fileBlockChain.write(block)
                 i += 4
 
         messageToB = 'true'

@@ -62,18 +62,18 @@ def main():
 				print('Tx: ' + payer + ' pays ' + payee + ' the amount of ' + str(txAmount) + ' BC.\n')
 				tx = (payer + payee + hex(txAmount))            # create a transaction and store in tx
 				unconfirmedBalance -= (txAmount + txFee)        # update unconfirmedBalance after transaction 
-				with open('unconfirmed_T.txt', 'a') as fileUnconfirmedTx:
+				with open('unconfirmed_TA.txt', 'a') as fileUnconfirmedTx:
 					fileUnconfirmedTx.write(str(tx) + '\n')         # write tx to unconfirmed_T.txt
 				fileUnconfirmedTx.close()
 				message = str.encode(str(tx), 'utf-8')          # encode tx and store in message
 				clientSocketA.send(message)                     # send message to server
 				if (payerInput == '1'):
 					unconfirmedBalanceA1 = unconfirmedBalance
-					with open('balance.txt', 'w') as fileBalance:
+					with open('balanceA.txt', 'w') as fileBalance:
 						fileBalance.write('A0000001:' + str(hex(unconfirmedBalanceA1)) + str(hex(confirmedBalanceA1)) + '\n')
 				if (payerInput == '2'):
 					unconfirmedBalanceA2 = unconfirmedBalance
-					with open('balance.txt', 'w') as fileBalance:
+					with open('balanceA.txt', 'w') as fileBalance:
 						fileBalance.write('A0000002:' + str(hex(unconfirmedBalanceA2)) + str(hex(confirmedBalanceA2)) + '\n')
 
 		elif (option == '2'):
@@ -86,7 +86,7 @@ def main():
 		elif(option == '3'):
 			print('Option 3 has been selected.\n')
 			try:
-				unconfirmedTx = open('unconfirmed_T.txt', 'r')
+				unconfirmedTx = open('unconfirmed_TA.txt', 'r')
 			except IOError:
 				print('No transactions have been made yet.\n')
 			else:
@@ -97,7 +97,7 @@ def main():
 		elif(option == '4'):
 			print('Option 4 has been selected.\n')
 			try:
-				confirmedTx = open('confirmed_T.txt', 'r')
+				confirmedTx = open('confirmed_TA.txt', 'r')
 			except IOError:
 				print('No transactions have been confirmed yet.\n')
 			else:
