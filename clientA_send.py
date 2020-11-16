@@ -27,6 +27,20 @@ def main():
 	txFee = 2                       # transaction fee 
 	counter = 0
 
+	try:
+		file = open('blockchainB.txt', 'r')
+	except IOError:
+		print('No blocks in blockchain B.\n')
+	else:
+		blockchainB = file.read()
+		print(blockchainB)
+
+	# check string for which account (A1, A2)
+	# update balanceA.txt 
+	# update local confirmed balance variables
+	
+
+
 	loop = True     # bool variable loop initialized to True
 	while loop:     # while 'loop' is true loop through contents below
 		menu()      # call menu() function to display menu

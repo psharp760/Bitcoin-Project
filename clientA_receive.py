@@ -7,17 +7,6 @@ clientSocketA = socket(AF_INET, SOCK_DGRAM)
 clientSocketA.bind(('', clientPortA))
 print('client A is ready to receive.\n')
 
-try:
-	file = open('blockchainB.txt', 'r')
-except IOError:
-	print('No blocks in blockchain B.\n')
-else:
-	blockchainB = file.read()
-	print(blockchainB)
-
-	# check string for which account (A1, A2)
-	# update balance.txt 
-
 while 1:
 	message, serverAddress = clientSocketA.recvfrom(2048)
 	modifiedMessage = message.decode()
