@@ -118,14 +118,9 @@ def main():
 			except IOError:
 				print('No transactions have been confirmed yet.\n')
 			else:
-				confirmedTxR = confirmedTx.read()
-				confirmedList = confirmedTxR.split('\n')
-
-				for i in confirmedList:
-					if i:
-						counter += 1
-				print('Transaction: ')
-				print(counter)
+				N = 4
+				for line in (confirmedTx.readlines() [-N:]):
+					print(line, end = '')
 		elif(option == '5'):
 			print('Option 5 has been selected.\n')
 		elif(option == '6'):
