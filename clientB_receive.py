@@ -38,3 +38,10 @@ while 1:
 		os.rename("temp_t2B.txt", "temp_TB.txt")
 		os.remove("unconfirmed_TB.txt")
 		os.rename("unconfirmed2B.txt", "unconfirmed_TB.txt")
+
+	else:
+		tempBalFile = open('tempBalB.txt', 'w')
+		tempBalFile.write(modifiedMessage)
+		print(modifiedMessage)
+		tempBalFile.close()
+

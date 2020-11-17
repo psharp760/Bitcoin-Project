@@ -39,4 +39,9 @@ while 1:
 		os.remove("unconfirmed_TA.txt")
 		os.rename("unconfirmed2A.txt", "unconfirmed_TA.txt")
 
+	else:
+		tempBalFile = open('tempBalA.txt', 'w')
+		tempBalFile.write(modifiedMessage)
+		print(modifiedMessage)
+		tempBalFile.close()
 

@@ -26,6 +26,7 @@ def main():
 	confirmedBalanceA2 = 1000       # confirmed balance for account A0000002
 	txFee = 2                       # transaction fee 
 	counter = 0
+	clientHeader = 'C'
 
 	loop = True     # bool variable loop initialized to True
 	while loop:     # while 'loop' is true loop through contents below
@@ -81,7 +82,7 @@ def main():
 				with open('unconfirmed_TA.txt', 'a') as fileUnconfirmedTx:
 					fileUnconfirmedTx.write(str(tx) + '\n')         # write tx to unconfirmed_T.txt
 				fileUnconfirmedTx.close()
-				message = str.encode(str(tx), 'utf-8')          # encode tx and store in message
+				message = str.encode(str(clientHeader + tx), 'utf-8')          # encode tx and store in message
 				clientSocketA.send(message)                     # send message to server
 				if (payerInput == '1'):
 					unconfirmedBalanceA1 = unconfirmedBalance
@@ -106,7 +107,7 @@ def main():
 				print('No transactions have been made yet.\n')
 			else:
 				unconfirmedTxR = unconfirmedTx.read()
-				print('The unconfirmed balance is:\n')
+				print('Unconfirmed transactions:\n')
 				print(unconfirmedTxR)
 				unconfirmedTx.close()
 		elif(option == '4'):
