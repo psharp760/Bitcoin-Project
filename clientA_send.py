@@ -1,5 +1,6 @@
 # clientA_send.py
 from socket import *
+import os
 
 # menu() function displays menu to user
 def menu():
@@ -30,24 +31,24 @@ def main():
 
 	loop = True     # bool variable loop initialized to True
 	while loop:     # while 'loop' is true loop through contents below
-
-		# try:
-		# 	blockchainB = open('confirmed_TB.txt', 'r')
-		# except IOError:
-		# 	print('No blocks in blockchain B.\n')
-		# else:
-		# 	for line in blockchainB.readlines():
-		# 		accountB = line[0:8]
-		# 		accountA = line[8:16]
-		# 		amount = int(line[18:], 16)
-
-		# 		if (accountA == 'A0000001'):
-		# 			confirmedBalanceA1 += amount
-		# 		elif (accountA == 'A0000002'):
-		# 			confirmedBalanceA2 += amount
-		
 		menu()      # call menu() function to display menu
-		option = input('Input choice (1 - 6): ')        # get user input for menu(), store in option		
+		option = input('Input choice (1 - 6): ')        # get user input for menu(), store in option	
+
+		try:
+			fileTempBal = open('tempBalA.txt', 'r')
+		except IOError:
+			print('No confirmed transactions to update balance.\n')
+		else:
+			for line in fileTempBal.readlines():
+				accountB = line[0:8]
+				accountA = line[8:16]
+				amount = int(line[18:], 16)
+
+				if (accountA == 'A0000001'):
+					confirmedBalanceA1 += amount
+				elif (accountA == 'A0000002'):
+					confirmedBalanceA2 += amount
+			os.remove('tempBalA.txt')	
 
 		if (option == '1'):                             # check if user inputs option 1 to enter new transaction
 			print('Option 1 has been selected.\n')      # print sub menu for user to input transaction

@@ -1,19 +1,21 @@
 # clientB_send.py
 from socket import *
+import os
 
 # menu() function displays menu to user
 def menu():
+
     print('1.	Enter new transaction\n')
     print('2.	Display current balance of each account\n')
     print('3. 	Display unconfirmed transactions\n')
     print('4. 	Display last X number of confirmed transactions\n')
     print('5. 	Display Blockchain\n')
     print('6. 	Exit program\n')
-
 # end of menu()
 
 # main() function driver program for clientA_send
 def main():
+
     serverName = 'localhost'  # establish connection to server
     serverPortB = 20000  # set port number
     clientSocketB = socket(AF_INET, SOCK_DGRAM)  # create socket
@@ -31,6 +33,22 @@ def main():
     while loop:  # while 'loop' is true loop through contents below
         menu()  # call menu() function to display menu
         option = input('Input choice (1 - 6): ')  # get user input for menu(), store in option
+
+        try:
+            fileTempBal = open('tempBalB.txt', 'r')
+        except IOError:
+            print('No confirmed transactions to update balance.\n')
+        else:
+            for line in fileTempBal.readlines():
+                accountA = line[0:8]
+                accountB = line[8:16]
+                amount = int(line[18:], 16)
+
+                if (accountB == 'B0000001'):
+                    confirmedBalanceB1 += amount
+                elif (accountB == 'B0000002'):
+                    confirmedBalanceB2 += amount
+            os.remove('tempBalB.txt')
 
         if (option == '1'):  # check if user inputs option 1 to enter new transaction
             print('Option 1 has been selected.\n')  # print sub menu for user to input transaction
@@ -75,9 +93,6 @@ def main():
                     unconfirmedBalanceB2 = unconfirmedBalance
                     with open('balanceB.txt', 'w') as fileBalance:
                         fileBalance.write('B0000001:' +str(hex(unconfirmedBalanceB1)) +str(hex(confirmedBalanceB1)) + '\n' + 'B0000002:' + str(hex(unconfirmedBalanceB2)) + str(hex(confirmedBalanceB2)))
-
-            # update balance.txt with new unconfirmed balance
-
         elif (option == '2'):
             print('Option 2 has been selected.\n')
             print('The current balance for each account:\n')

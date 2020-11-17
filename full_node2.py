@@ -64,7 +64,7 @@ while 1:
                     block = blockChain[i] + blockChain[i + 1] + blockChain[i + 2] + blockChain[i + 3] + '\n'
                     fileBlockChain.write(block)
                     i += 4
-                fileBlockChain.close()
+
             messageToB = 'true'
             clientSocketB.sendto(messageToB.encode(), (clientName, clientPortB))
 
