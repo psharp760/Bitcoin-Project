@@ -96,11 +96,11 @@ def main():
 		elif (option == '2'):
 			print('Option 2 has been selected.\n')
 			print('The current balance for each account:\n')
-			BalA1 = ('A0000001:'+hex(unconfirmedBalanceA1)+':'+hex(confirmedBalanceA1))
+			BalA1 = ('A0000001:' + hex(unconfirmedBalanceA1) + ':' + hex(confirmedBalanceA1))
 			print(BalA1)
-			BalA2 = ('A0000002:'+hex(unconfirmedBalanceA2)+':'+hex(confirmedBalanceA2))
+			BalA2 = ('A0000002:' + hex(unconfirmedBalanceA2) + ':' + hex(confirmedBalanceA2))
 			print(BalA2)
-		elif(option == '3'):
+		elif (option == '3'):
 			print('Option 3 has been selected.\n')
 			try:
 				unconfirmedTx = open('unconfirmed_TA.txt', 'r')
@@ -111,7 +111,7 @@ def main():
 				print('Unconfirmed transactions:\n')
 				print(unconfirmedTxR)
 				unconfirmedTx.close()
-		elif(option == '4'):
+		elif (option == '4'):
 			print('Option 4 has been selected.\n')
 			try:
 				confirmedTx = open('confirmed_TA.txt', 'r')
@@ -121,9 +121,9 @@ def main():
 				N = 4
 				for line in (confirmedTx.readlines() [-N:]):
 					print(line, end = '')
-		elif(option == '5'):
+		elif (option == '5'):
 			print('Option 5 has been selected.\n')
-		elif(option == '6'):
+		elif (option == '6'):
 			print('Program has been quit.\n')
 			loop = False
 		else:
