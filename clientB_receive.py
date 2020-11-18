@@ -1,4 +1,9 @@
+# Program: Bitcoin Socket Project
+# Authors: Peter Sharp, Hieu Nguyen, Daniel Martinez 
+# Class: CS 436
+
 # clientB_receive.py
+
 from socket import *
 import os
 
@@ -42,6 +47,6 @@ while 1:
 	else:
 		tempBalFile = open('tempBalB.txt', 'w')
 		tempBalFile.write(modifiedMessage)
-		print(modifiedMessage)
+		# print(modifiedMessage)
 		tempBalFile.close()
 

@@ -1,4 +1,9 @@
+# Program: Bitcoin Socket Project
+# Authors: Peter Sharp, Hieu Nguyen, Daniel Martinez 
+# Class: CS 436
+
 # clientA_send.py
+
 from socket import *
 import os
 
@@ -26,7 +31,6 @@ def main():
 	unconfirmedBalanceA2 = 1000     # unconfirmed balance for account A0000002
 	confirmedBalanceA2 = 1000       # confirmed balance for account A0000002
 	txFee = 2                       # transaction fee 
-	counter = 0
 	clientHeader = 'C'
 
 	loop = True     # bool variable loop initialized to True
@@ -123,6 +127,14 @@ def main():
 					print(line, end = '')
 		elif (option == '5'):
 			print('Option 5 has been selected.\n')
+			try:
+				blockchainFile = open('blockchain.txt', 'r')
+			except IOError:
+				print('No blocks in blockchain yet.\n')
+			else:
+				blockchain = blockchainFile.readlines()
+				for line in blockchain:
+					print(line)
 		elif (option == '6'):
 			print('Program has been quit.\n')
 			loop = False
@@ -133,3 +145,5 @@ def main():
 # end of main()
 
 main()      # call main() driver function
+
+

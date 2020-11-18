@@ -1,4 +1,9 @@
+# Program: Bitcoin Socket Project
+# Authors: Peter Sharp, Hieu Nguyen, Daniel Martinez 
+# Class: CS 436
+
 # full_node1.py
+
 from socket import *
 
 # socket for receiving from clientA_send.py
@@ -66,7 +71,4 @@ while 1:
 			blockChain.clear()		
 			messageToA = 'true'
 			clientSocketA.sendto(messageToA.encode(), (clientName, clientPortA))
-
-
-
 
