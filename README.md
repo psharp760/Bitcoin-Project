@@ -1,6 +1,6 @@
 # Bitcoin-Project
 
-CS 436 Project1: Network Programming to Implement Bitcoin
+Network Programming to Implement Bitcoin
 
 Group Members: Peter Sharp, Hieu Nguyen, Daniel Martinez
 
